@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: hibernate
+  datasource:
+    url: jdbc:tc:postgresql:13.7:///essai
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100
+        order_updates: true
+        order_inserts: true
+

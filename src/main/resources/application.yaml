@@ -1,5 +1,22 @@
 spring:
+  profiles:
+    active: multiple_query_with_read_only
   application:
     name: hibernate
   datasource:
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5435/hibernate-db
+    username: ${DB_USERNAME:hibernate-user}
+    password: ${DB_PASSWORD:Password1234}
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        generate_statistics: true
+        jdbc:
+          batch_size: 30
+        order_inserts: true
+        order_updates: true

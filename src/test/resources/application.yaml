@@ -2,15 +2,15 @@ spring:
   application:
     name: hibernate
   datasource:
-    url: jdbc:tc:postgresql:13.7:///essai
+    url: jdbc:postgresql://localhost:5435/hibernate-db
+    username: ${DB_USERNAME:hibernate-user}
+    password: ${DB_PASSWORD:Password1234}
   jpa:
     hibernate:
-      ddl-auto: update
-
+      ddl-auto: create-drop
     properties:
       hibernate:
-        jdbc:
-          batch_size: 100
-        order_updates: true
-        order_inserts: true
+        show_sql: true
+        format_sql: true
+        generate_statistics: true
 

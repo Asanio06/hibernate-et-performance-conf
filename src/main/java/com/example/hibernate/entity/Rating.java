@@ -1,6 +1,7 @@
 package com.example.hibernate.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -11,10 +12,9 @@ import java.util.UUID;
 @Entity
 public class Rating {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "varchar(36)")
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "rating_generator")
+    @SequenceGenerator(name="rating_generator", sequenceName = "rating_seq",allocationSize = 50)
+    private Long id;
 
     @Column
     @JdbcTypeCode(SqlTypes.INTEGER)
@@ -23,7 +23,8 @@ public class Rating {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String comment;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
+    @JsonBackReference
     private Movie movie;
 
 
@@ -32,11 +33,11 @@ public class Rating {
     }
 
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -11,10 +11,9 @@ import java.util.UUID;
 @Entity
 public class Actor {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "varchar(36)")
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "actor_generator")
+    @SequenceGenerator(name = "actor_generator", sequenceName = "actor_seq", allocationSize = 50)
+    private Long id;
 
     @Column
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -32,11 +31,11 @@ public class Actor {
 
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

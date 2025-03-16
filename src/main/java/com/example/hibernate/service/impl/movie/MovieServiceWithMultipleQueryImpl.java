@@ -31,7 +31,7 @@ public class MovieServiceWithMultipleQueryImpl implements MovieService {
 
         var movies = session
                 .createQuery("""
-                           select m from Movie m 
+                           select m from Movie m
                            left join fetch m.movieActors ma
                            left join fetch ma.actor
                            where m.countryCode in (:countryCodes)
@@ -48,6 +48,5 @@ public class MovieServiceWithMultipleQueryImpl implements MovieService {
                 .getResultList();
 
         return movies;
-
     }
 }

@@ -35,7 +35,7 @@ public class SyncMoviesInformationServiceWithStatelessSessionImpl implements Syn
     public void syncMovies() {
         List<MovieInformation> moviesInformations = movieInformationClient.getMoviesInformations();
 
-        StatelessSession session = sessionFactory.withStatelessOptions().openStatelessSession();
+        StatelessSession session = sessionFactory.openStatelessSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -53,12 +53,14 @@ public class SyncMoviesInformationServiceWithStatelessSessionImpl implements Syn
 
                         movieInformation.actors().forEach(movieActorInformation -> {
                             var actor = ActorMapper.fromMovieActorInformation(movieActorInformation);
+
                             actorsToAdd.add(actor);
 
                             var movieActor = new MovieActor();
                             movieActor.setMovie(movie);
                             movieActor.setActor(actor);
                             movieActor.setCharacterName(movieActorInformation.characterName());
+
                             actorsMoviesToAdd.add(movieActor);
                         });
 
@@ -70,6 +72,7 @@ public class SyncMoviesInformationServiceWithStatelessSessionImpl implements Syn
                         });
 
                     });
+
 
             actorsToAdd.forEach(session::insert);
 

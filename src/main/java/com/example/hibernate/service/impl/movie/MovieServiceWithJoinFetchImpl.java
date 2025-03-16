@@ -30,7 +30,7 @@ public class MovieServiceWithJoinFetchImpl implements MovieService {
         if (countryCodes == null || countryCodes.isEmpty()) {
             return session
                     .createQuery("""
-                               select m from Movie m 
+                               select m from Movie m
                                left join fetch m.ratings
                                left join fetch m.movieActors ma
                                left join fetch ma.actor
@@ -40,7 +40,7 @@ public class MovieServiceWithJoinFetchImpl implements MovieService {
 
         return session
                 .createQuery("""
-                           select m from Movie m 
+                           select m from Movie m
                            left join fetch m.ratings
                            left join fetch m.movieActors ma
                            left join fetch ma.actor

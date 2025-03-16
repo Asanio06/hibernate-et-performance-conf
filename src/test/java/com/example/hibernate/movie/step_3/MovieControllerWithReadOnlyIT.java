@@ -10,19 +10,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ActiveProfiles("multiple_query_with_read_only")
 public class MovieControllerWithReadOnlyIT extends BasicIT {
 
-
     @Test
     public void should_return_all_movies_with_country_code() throws Exception {
 
         insertFakeMovies(2);
 
-        var response = mvc.perform(
+        mvc.perform(
                         MockMvcRequestBuilders.get("/movies")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn()
-                .getResponse();
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 

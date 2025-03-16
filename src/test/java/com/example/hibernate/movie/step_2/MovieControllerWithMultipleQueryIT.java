@@ -16,13 +16,11 @@ public class MovieControllerWithMultipleQueryIT extends BasicIT {
 
         insertFakeMovies(2);
 
-        var response = mvc.perform(
+        mvc.perform(
                         MockMvcRequestBuilders.get("/movies")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn()
-                .getResponse();
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 
